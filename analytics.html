@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics | HackFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfd; }
+        .glass-sidebar { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); }
+        .bento-card { background: white; border: 1px solid #eaecf0; transition: all 0.2s ease; }
+        .nav-link.active { background-color: #f5f3ff; color: #4f46e5; border: 1px solid #e0e7ff; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+
+    <aside class="w-72 glass-sidebar border-r border-gray-200 flex flex-col p-6 space-y-8">
+        <div class="flex items-center gap-3 px-2">
+            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg"><span class="text-white font-bold text-xl">H</span></div>
+            <span class="text-xl font-bold text-slate-800">HackFlow</span>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-4 px-2">Main Menu</p>
+            <a href="index.html" class="nav-link flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-gray-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Overview
+            </a>
+            <a href="analytics.html" class="nav-link active flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Analytics
+            </a>
+            <a href="settings.html" class="nav-link flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-gray-50 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Settings
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-[#fcfcfd] overflow-y-auto">
+        <header class="h-20 flex items-center px-10 border-b border-gray-100 bg-white/50">
+            <h1 class="text-2xl font-bold text-slate-800">Performance Analytics</h1>
+        </header>
+
+        <div class="p-10 space-y-8">
+            <div class="bento-card p-8 rounded-[2rem] bg-white">
+                <div class="mb-6 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">Usage Over Time</h3>
+                        <p class="text-sm text-slate-400">Monthly data traffic across all nodes</p>
+                    </div>
+                    <select class="bg-gray-50 border border-gray-200 rounded-lg px-3 py-1 text-sm outline-none">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                    </select>
+                </div>
+                <canvas id="analyticsChart" style="max-height: 400px;"></canvas>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bento-card p-6 rounded-[2rem] text-center">
+                    <p class="text-slate-400 text-sm">Bounce Rate</p>
+                    <h4 class="text-2xl font-bold text-slate-800">12.4%</h4>
+                </div>
+                <div class="bento-card p-6 rounded-[2rem] text-center">
+                    <p class="text-slate-400 text-sm">Avg. Session</p>
+                    <h4 class="text-2xl font-bold text-slate-800">4m 32s</h4>
+                </div>
+                <div class="bento-card p-6 rounded-[2rem] text-center">
+                    <p class="text-slate-400 text-sm">Peak Hours</p>
+                    <h4 class="text-2xl font-bold text-slate-800">2pm - 5pm</h4>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const ctx = document.getElementById('analyticsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Requests',
+                    data: [12000, 19000, 15000, 25000, 22000, 30000, 45000],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackFlow | Ultimate Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; transition: all 0.3s ease; }
+        .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        .bento-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .bento-card:hover { transform: translateY(-4px); }
+        
+        .dark body { background-color: #020617; }
+        .dark .glass-sidebar { background: rgba(15, 23, 42, 0.8); border-color: #1e293b; }
+        .dark .bento-card { background: #0f172a; border-color: #1e293b; color: white; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-[#F8FAFC] text-slate-900 dark:text-slate-100">
+
+    <aside class="w-72 glass-sidebar border-r border-slate-200 bg-white/80 flex flex-col p-6 z-50">
+        <div class="flex items-center gap-3 px-2 mb-10">
+            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-200">
+                <span class="text-white font-bold text-xl">H</span>
+            </div>
+            <span class="text-xl font-bold tracking-tight dark:text-white">HackFlow</span>
+        </div>
+
+        <nav class="flex-1 space-y-1">
+            <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-4 px-2">Main Menu</p>
+            <a href="index.html" class="flex items-center gap-3 px-4 py-3 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-xl font-semibold border border-indigo-100/50 dark:border-indigo-500/20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Dashboard
+            </a>
+            <a href="analytics.html" class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Analytics
+            </a>
+            <a href="settings.html" class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
+                Settings
+            </a>
+        </nav>
+
+        <div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+            <button onclick="toggleDarkMode()" class="w-full flex items-center justify-between p-3 bg-slate-100 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 transition-all group">
+                <span class="text-xs font-bold dark:text-slate-300">Appearance</span>
+                <div class="p-1.5 bg-white dark:bg-indigo-600 rounded-lg shadow-sm">
+                    <svg id="sun-icon" class="w-4 h-4 text-amber-500 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z"></path></svg>
+                    <svg id="moon-icon" class="w-4 h-4 text-white hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                </div>
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        
+        <header class="h-20 flex items-center justify-between px-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-40">
+            <div class="flex-1 max-w-lg">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></span>
+                    <input type="text" placeholder="Search systems..." class="w-full pl-10 pr-4 py-2.5 bg-slate-100 dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white transition-all">
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex flex-col items-end">
+                    <span class="text-sm font-bold dark:text-white">Alex Doe</span>
+                    <span class="text-[10px] text-emerald-500 font-bold uppercase tracking-wider">Verified Admin</span>
+                </div>
+                <div class="w-12 h-12 rounded-2xl border-2 border-indigo-100 dark:border-slate-700 p-0.5 cursor-pointer hover:rotate-3 transition-transform">
+                    <img src="https://ui-avatars.com/api/?name=Alex+Doe&background=6366f1&color=fff" class="w-full h-full rounded-[0.6rem] object-cover" alt="Profile">
+                </div>
+            </div>
+        </header>
+
+        <div class="p-10 space-y-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bento-card bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm md:col-span-2 relative overflow-hidden">
+                    <div class="relative z-10">
+                        <p class="text-slate-400 dark:text-slate-500 font-bold text-xs uppercase tracking-widest">Global Reach</p>
+                        <h3 class="text-4xl font-extrabold mt-3 dark:text-white">142.8k</h3>
+                        <p class="text-emerald-500 text-sm font-bold mt-2">↑ 12.5% vs last week</p>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl"></div>
+                </div>
+                <div class="bento-card bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <p class="text-slate-400 font-bold text-xs uppercase tracking-widest">Uptime</p>
+                    <h3 class="text-4xl font-extrabold mt-3 dark:text-white">99.9%</h3>
+                    <div class="mt-4 flex gap-1">
+                        <div class="h-1.5 w-12 bg-emerald-500 rounded-full"></div>
+                        <div class="h-1.5 w-4 bg-emerald-500/20 rounded-full"></div>
+                    </div>
+                </div>
+                <div class="bento-card bg-indigo-600 p-8 rounded-[2.5rem] text-white">
+                    <p class="text-indigo-200 font-bold text-xs uppercase tracking-widest">Active nodes</p>
+                    <h3 class="text-4xl font-extrabold mt-3">84</h3>
+                    <p class="text-indigo-100 text-sm mt-2 opacity-80">Synced</p>
+                </div>
+            </div>
+
+            <div class="bento-card bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div class="px-8 py-6 border-b border-slate-50 dark:border-slate-800 flex justify-between items-center">
+                    <h3 class="text-lg font-bold dark:text-white">Recent Deployments</h3>
+                    <button class="text-indigo-600 text-sm font-bold">View History</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-400 text-[10px] uppercase font-bold tracking-widest">
+                            <tr>
+                                <th class="px-8 py-4">Node</th>
+                                <th class="px-8 py-4">Status</th>
+                                <th class="px-8 py-4">Region</th>
+                                <th class="px-8 py-4 text-right">Commit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+                                <td class="px-8 py-5 font-bold text-slate-700 dark:text-slate-300">Hack-API-01</td>
+                                <td class="px-8 py-5"><span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full text-[10px] font-black uppercase tracking-tighter">Active</span></td>
+                                <td class="px-8 py-5 dark:text-slate-400">US-East-1</td>
+                                <td class="px-8 py-5 text-right font-mono text-xs text-slate-400">#4a90e2</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+                                <td class="px-8 py-5 font-bold text-slate-700 dark:text-slate-300">Auth-Gateway</td>
+                                <td class="px-8 py-5"><span class="px-3 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-full text-[10px] font-black uppercase tracking-tighter">Standby</span></td>
+                                <td class="px-8 py-5 dark:text-slate-400">EU-West-2</td>
+                                <td class="px-8 py-5 text-right font-mono text-xs text-slate-400">#7c3aed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <section class="space-y-6 pb-20">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <h3 class="text-2xl font-bold dark:text-white">Support Hub</h3>
+                        <p class="text-sm text-slate-400">Direct line to our core engineering team.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-6">
+                        <div class="bento-card bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-2xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Chat</p>
+                                <p class="text-sm font-bold dark:text-white">Online Now</p>
+                            </div>
+                        </div>
+                        <div class="bento-card bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 flex items-center gap-4">
+                            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 rounded-2xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Email</p>
+                                <p class="text-sm font-bold dark:text-white">dev@hackflow.io</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 bento-card bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm relative overflow-hidden">
+                        <div class="relative z-10 space-y-4">
+                            <h4 class="font-bold text-lg dark:text-white">New Support Ticket</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Issue Title" class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white">
+                                <select class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-slate-400">
+                                    <option>Technical Support</option>
+                                    <option>Scale Request</option>
+                                </select>
+                                <textarea rows="3" placeholder="Message details..." class="md:col-span-2 w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white"></textarea>
+                                <div class="md:col-span-2 flex justify-end">
+                                    <button onclick="alert('Ticket Sent!')" class="bg-indigo-600 text-white px-8 py-3 rounded-xl text-sm font-bold shadow-lg shadow-indigo-100 dark:shadow-none hover:bg-indigo-700 transition-all">Submit Ticket →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+    </script>
+</body>
+</html>
